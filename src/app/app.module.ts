@@ -6,6 +6,7 @@ import { AngularFireModule } from 'angularfire2'
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { DropZoneDirective } from './drop-zone.directive';
 import { CategoryManagerComponent } from './category-manager/category-manager.component';
+import { BankAccountComponent } from './bank-account/bank-account.component';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -22,7 +24,8 @@ export const firebaseConfig = environment.firebaseConfig;
     NavbarComponent,
     UserPageComponent,
     DropZoneDirective,
-    CategoryManagerComponent
+    CategoryManagerComponent,
+    BankAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ export const firebaseConfig = environment.firebaseConfig;
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
