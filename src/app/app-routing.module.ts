@@ -4,13 +4,15 @@ import { ConsoleComponent } from './console/console.component';
 import { LoginComponent } from './login/login.component';
 import { CategoryManagerComponent } from './category-manager/category-manager.component';
 import { LinksManagerComponent } from './links-manager/links-manager.component';
-import { BankAccountComponent } from './bank-account/bank-account.component'
+import { BankAccountComponent } from './bank-account/bank-account.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/console',pathMatch: 'full'},
   { path:'console', component:ConsoleComponent, canActivate:[AuthGuard]},
+  { path:'editProduct', component:EditProductComponent, canActivate:[AuthGuard]},
   { path:'linksManager', component:LinksManagerComponent, canActivate:[AuthGuard]},
   { path:'categoryManager', component:CategoryManagerComponent, canActivate:[AuthGuard]},
   { path:'bankAccount', component:BankAccountComponent, canActivate:[AuthGuard]},
@@ -23,4 +25,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [ConsoleComponent,LoginComponent,CategoryManagerComponent,LinksManagerComponent,BankAccountComponent,PageNotFoundComponent]
+export const routingComponents = [ConsoleComponent,EditProductComponent,LoginComponent,CategoryManagerComponent,LinksManagerComponent,BankAccountComponent,PageNotFoundComponent]

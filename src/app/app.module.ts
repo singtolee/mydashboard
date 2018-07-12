@@ -15,6 +15,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { DropZoneDirective } from './drop-zone.directive';
 import { CategoryManagerComponent } from './category-manager/category-manager.component';
 import { BankAccountComponent } from './bank-account/bank-account.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -25,7 +26,8 @@ export const firebaseConfig = environment.firebaseConfig;
     UserPageComponent,
     DropZoneDirective,
     CategoryManagerComponent,
-    BankAccountComponent
+    BankAccountComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

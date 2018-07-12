@@ -1,0 +1,20 @@
+<div *ngFor="let prd of products | async">
+  <div class="card">
+    <div class="card-header">
+      <a [href]="prd.data.url" target="_blank"><i class="fas fa-link"></i>1688 link</a>
+    </div>
+    <div class="card-body">
+      <img *ngFor="let img of prd.data.images" [src]="img" height="100" class="border border-primary rounded">
+    </div>
+    <div class="card-body">
+      <p>Name: {{prd.data.name}}</p>
+      <p>Key word: {{prd.data.keyword}}</p>
+      <p>Sales count: {{prd.data.sales_count}}</p>
+      <p>Score: {{prd.data.score}}</p>
+      <p>Comment count: {{prd.data.comment_count}}</p>
+      <p>Original price: {{prd.data.original_price}}</p>
+      <p>Price: {{prd.data.price}}</p>
+      <p>Unit weight: {{prd.data.uw}}</p>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 interface Category {
@@ -16,7 +16,7 @@ interface Category {
   templateUrl: './category-manager.component.html',
   styleUrls: ['./category-manager.component.css']
 })
-export class CategoryManagerComponent implements OnInit {
+export class CategoryManagerComponent implements OnInit,OnDestroy {
 
   task: AngularFireUploadTask;
   percentage: Observable<number>;
@@ -27,10 +27,11 @@ export class CategoryManagerComponent implements OnInit {
 
   categories: Observable<Category[]>;
   private categoriesCol: AngularFirestoreCollection<Category>;
-  public categoryTitle: string = "";
-  public keyWord:string = "";
+  public categoryTitle: string;
+  public keyWord:string;
   public displayOrder:number = 100;
-  public imgUrl: string = "";
+  public imgUrl:string;
+  private sub:Subscription;
 
 
   constructor(private db: AngularFirestore, private storage: AngularFireStorage) {
@@ -56,7 +57,11 @@ export class CategoryManagerComponent implements OnInit {
     this.task = this.storage.upload(path,file);
     this.percentage = this.task.percentageChanges();
     this.task.snapshotChanges().pipe(
-      finalize(()=>this.downloadURL = ref.getDownloadURL())
+      finalize(()=>{
+        this.downloadURL = ref.getDownloadURL()
+        this.sub = this.downloadURL.subscribe(u=>this.imgUrl=u)
+
+      })
     ).subscribe();
   }
 
@@ -75,13 +80,18 @@ export class CategoryManagerComponent implements OnInit {
       this.db.collection(this.dir).add(data).then((success) => {
         this.categoryTitle = '';
         this.keyWord = '';
-        this.imgUrl = '';
         this.displayOrder = 100;
       })
     }
   }
 
   ngOnInit() {
+  }
+  ngOnDestroy(){
+    if(this.sub){
+      this.sub.unsubscribe()
+    }
+
   }
 
 }
