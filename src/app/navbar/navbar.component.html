@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="auth.user | async">
+  <a class="navbar-brand ml-5" routerLink="console">Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/linksManager">Manager Links</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/categoryManager">Manager Categories</a>
+      </li>
+    </ul>
+    <span class="navbar-text mr-5" *ngIf="auth.user | async as user">
+      {{user.email + "   "}}<button (click)="auth.signOut()" class="btn btn-outline-danger btn-sm">Log out</button>
+    </span>
+  </div>
+</nav>
