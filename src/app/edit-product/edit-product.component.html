@@ -1,20 +1,106 @@
-<div *ngFor="let prd of products | async">
-  <div class="card">
-    <div class="card-header">
-      <a [href]="prd.data.url" target="_blank"><i class="fas fa-link"></i>1688 link</a>
-    </div>
-    <div class="card-body">
-      <img *ngFor="let img of prd.data.images" [src]="img" height="100" class="border border-primary rounded">
-    </div>
-    <div class="card-body">
-      <p>Name: {{prd.data.name}}</p>
-      <p>Key word: {{prd.data.keyword}}</p>
-      <p>Sales count: {{prd.data.sales_count}}</p>
-      <p>Score: {{prd.data.score}}</p>
-      <p>Comment count: {{prd.data.comment_count}}</p>
-      <p>Original price: {{prd.data.original_price}}</p>
-      <p>Price: {{prd.data.price}}</p>
-      <p>Unit weight: {{prd.data.uw}}</p>
+<div class="container">
+  <div class="row">
+    <div *ngFor="let prd of products | async" class="col-12 col-sm-12 col-md-12 col-lg-6 mb-2">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <a [href]="prd.data.url" target="_blank">
+            <i class="fas fa-link"></i>
+          </a>
+          <span class="badge badge-danger badge-pill">{{prd.data.price}} CNY</span>
+          <button type="button" class="btn btn-success btn-sm" (click)="turnon(prd.id)">ON</button>
+          <button type="button" class="btn btn-warning btn-sm" (click)="turnoff(prd.id)">OFF</button>{{prd.data.status}}
+          <button type="button" class="btn btn-success btn-sm" (click)="sendtohomepage(prd.id)">To Home</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="removefromhome(prd.id)">Off Home</button>{{prd.data.isHomePagePrd}}
+        </div>
+        <div class="card-body">
+          <img *ngFor="let img of prd.data.images" [src]="img" height="200" class="border border-primary rounded">
+        </div>
+        <div class="card-body">
+          <p>Name: {{prd.data.name}}</p>
+          <p class="small">{{prd.id}}</p>
+          <table class="table table-sm table-hover">
+              <tbody>
+                <tr>
+                  <th scope="row">Price</th>
+                  <td *ngFor="let info of prd.data.trade_info">{{info.price}} CNY</td>
+                </tr>
+                <tr>
+                  <th scope="row">Quantity</th>
+                  <td *ngFor="let info of prd.data.trade_info">>={{info.min_num}} pcs</td>
+                </tr>
+              </tbody>
+            </table>
+          <p>Key word: {{prd.data.keyword}}</p>
+          <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Key Word</span>
+              </div>
+              <input type="text" [(ngModel)]="prd.data.keyword" class="form-control">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-success btn-sm" type="button" (click)="resetKeyword(prd.data.keyword,prd.id)">Reset Key word</button>
+              </div>
+          </div>
+          <table class="table table-sm table-hover">
+              <tbody>
+                <tr>
+                  <td>Sales count</td>
+                  <td>Score</td>
+                  <td>Comment count</td>
+                  <td>Original price</td>
+                </tr>
+                <tr>
+                  <td>{{prd.data.sales_count || 0}}</td>
+                  <td>{{prd.data.score || 0}}</td>
+                  <td>{{prd.data.comment_count || 0}}</td>
+                  <td>{{prd.data.original_price}}</td>
+                </tr>
+              </tbody>
+            </table>
+          <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Unit weight(kg)</span>
+              </div>
+              <input type="number" step="0.05" min="0.05" [(ngModel)]="prd.data.uw" class="form-control">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-success btn-sm" type="button" (click)="resetUW(prd.data.uw,prd.id)">Reset Unit weight</button>
+              </div>
+          </div>
+        </div>
+        <div class="card-body" >
+          <div *ngIf="isObject(prd.data.sku[0])">
+              <div *ngFor="let s of prd.data.sku" class="p-1">
+                <div *ngIf="s.values[0].image; else noImage">
+                  <div class="card">
+                    <div class="card-header">
+                      {{s.label}}
+                    </div>
+                    <div class="card-body">
+                      <span *ngFor="let val of s.values" class="mr-1">
+                        <img class="border border-secondary rounded" [src]="val.image" height="40px" width="40px">
+                      </span>
+                      <app-carousel [sku]="prd.data.sku[0].values"></app-carousel>
+                    </div>
+                  </div>
+                </div>
+                <ng-template #noImage>
+                  <div class="card">
+                    <div class="card-header">
+                      {{s.label}}
+                    </div>
+                    <div class="card-body">
+                      <span *ngFor="let val of s.values" class="mr-1">
+                        <button type="button" class="btn btn-outline-secondary btn-sm">{{val.desc}}</button>
+                      </span>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+        </div>
+        <div class="card-body">
+          <img *ngFor="let im of prd.data.detail" [src]="im" class="border border-primary rounded">
+        </div>
+      </div>
     </div>
   </div>
 </div>

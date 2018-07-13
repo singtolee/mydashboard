@@ -1,0 +1,8 @@
+<ngb-carousel *ngIf="sku">
+    <ng-template ngbSlide *ngFor="let val of sku">
+      <img [src]="val.image" onError="this.src='./assets/placeholder.png'">
+      <div class="carousel-caption">
+        <p>{{val.desc}}</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>

@@ -21,10 +21,11 @@ export class EditProductComponent implements OnInit {
 
   loadPrd(){
     return this.db.collection(this.dir, ref=>{
-      return ref.orderBy("sales_count","desc")
+      return ref
+      .orderBy("sales_count","desc")
       .orderBy("score", "desc")
       .orderBy("comment_count", "desc")
-      .limit(2)
+      .limit(6)
     }).snapshotChanges().pipe(map(actions=>{
       return actions.map(a=>{
         const data = a.payload.doc.data() as Product;
@@ -32,6 +33,36 @@ export class EditProductComponent implements OnInit {
         return {id,data};
       })
     }))
+  }
+
+  turnon(key:string){
+    console.log("turn on" + key)
+    this.db.doc(this.dir + '/' + key).update({status:true})
+  }
+
+  turnoff(key:string){
+    this.db.doc(this.dir + '/' + key).update({status:false})
+  }
+
+  removefromhome(key:string){
+    this.db.doc(this.dir + '/' + key).update({isHomePagePrd:'no'})
+  }
+
+  sendtohomepage(key:string){
+    console.log("send to home" + key)
+    this.db.doc(this.dir + '/' + key).update({isHomePagePrd:'home'})
+  }
+
+  resetUW(newUw:number,key:string){
+    this.db.doc(this.dir + '/' + key).update({uw:newUw})
+  }
+
+  resetKeyword(kw:string,key:string){
+    this.db.doc(this.dir + '/' + key).update({keyword:kw})
+  }
+
+  isObject(sth) {
+    return typeof sth === 'object';
   }
 
 }

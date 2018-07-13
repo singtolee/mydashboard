@@ -16,6 +16,7 @@ import { DropZoneDirective } from './drop-zone.directive';
 import { CategoryManagerComponent } from './category-manager/category-manager.component';
 import { BankAccountComponent } from './bank-account/bank-account.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { CarouselComponent } from './carousel/carousel.component';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -27,7 +28,8 @@ export const firebaseConfig = environment.firebaseConfig;
     DropZoneDirective,
     CategoryManagerComponent,
     BankAccountComponent,
-    EditProductComponent
+    EditProductComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
