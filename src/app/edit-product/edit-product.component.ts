@@ -25,7 +25,7 @@ export class EditProductComponent implements OnInit {
       .orderBy("sales_count","desc")
       .orderBy("score", "desc")
       .orderBy("comment_count", "desc")
-      .limit(6)
+      //.limit(6)
     }).snapshotChanges().pipe(map(actions=>{
       return actions.map(a=>{
         const data = a.payload.doc.data() as Product;
