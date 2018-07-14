@@ -21,11 +21,11 @@ export class EditProductComponent implements OnInit {
 
   loadPrd(){
     return this.db.collection(this.dir, ref=>{
-      return ref
+      return ref.where('status','==',false)
       .orderBy("sales_count","desc")
       .orderBy("score", "desc")
       .orderBy("comment_count", "desc")
-      //.limit(6)
+      .limit(1)
     }).snapshotChanges().pipe(map(actions=>{
       return actions.map(a=>{
         const data = a.payload.doc.data() as Product;
@@ -40,9 +40,21 @@ export class EditProductComponent implements OnInit {
     this.db.doc(this.dir + '/' + key).update({status:true})
   }
 
+  editSku(key:string,sku){
+    this.db.doc(this.dir + '/' + key).update({sku:JSON.parse(sku)})
+    //console.log("turn on" + key)
+    //console.log("turn KK" + sku)
+
+  }
+
+  editDetail(key:string,detail){
+    this.db.doc(this.dir + '/' + key).update({detail:JSON.parse(detail)})
+  }
+/*
   turnoff(key:string){
     this.db.doc(this.dir + '/' + key).update({status:false})
   }
+  */
 
   removefromhome(key:string){
     this.db.doc(this.dir + '/' + key).update({isHomePagePrd:'no'})
@@ -61,8 +73,17 @@ export class EditProductComponent implements OnInit {
     this.db.doc(this.dir + '/' + key).update({keyword:kw})
   }
 
+  delprd(key:string){
+    this.db.doc(this.dir + '/' + key).delete()
+  }
+
   isObject(sth) {
     return typeof sth === 'object';
+  }
+
+  json2str(json:any){
+    return JSON.stringify(json)
+
   }
 
 }

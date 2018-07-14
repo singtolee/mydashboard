@@ -6,11 +6,10 @@
           <a [href]="prd.data.url" target="_blank">
             <i class="fas fa-link"></i>
           </a>
-          <span class="badge badge-danger badge-pill">{{prd.data.price}} CNY</span>
           <button type="button" class="btn btn-success btn-sm" (click)="turnon(prd.id)">ON</button>
-          <button type="button" class="btn btn-warning btn-sm" (click)="turnoff(prd.id)">OFF</button>{{prd.data.status}}
           <button type="button" class="btn btn-success btn-sm" (click)="sendtohomepage(prd.id)">To Home</button>
           <button type="button" class="btn btn-danger btn-sm" (click)="removefromhome(prd.id)">Off Home</button>{{prd.data.isHomePagePrd}}
+          <i class="fas fa-trash" (click)="delprd(prd.id)"></i>
         </div>
         <div class="card-body">
           <img *ngFor="let img of prd.data.images" [src]="img" height="200" class="border border-primary rounded">
@@ -97,11 +96,27 @@
               </div>
             </div>
         </div>
+        <div class="card=body">
+          <p class="small" *ngFor="let i of prd.data.images">{{i}}</p>
+        </div>
+        <div>
+          {{prd.data.sku | json}}
+          
+        </div>
+        
+          <textarea ref-textarea cols="30" rows="10" [value]="json2str(prd.data.sku)"></textarea>
+          <button class="btn btn-danger btn-sm btn-block" (click)="editSku(prd.id,textarea.value)">Reset SKU</button>
+        
+        <div class="card=body">
+          <p class="small" *ngFor="let j of prd.data.detail">{{j}}</p>
+        </div>
         <ngb-carousel *ngIf="prd.data.detail">
             <ng-template ngbSlide *ngFor="let val of prd.data.detail">
               <img [src]="val" onError="this.src='./assets/placeholder.png'">
             </ng-template>
-          </ngb-carousel>
+      </ngb-carousel>
+      <textarea ref-detailarr [value]="json2str(prd.data.detail)" cols="30" rows="10"></textarea>
+      <button class="btn btn-danger btn-sm btn-block" (click)="editDetail(prd.id,detailarr.value)">Edit detail images array</button>
       </div>
     </div>
   </div>
