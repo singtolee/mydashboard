@@ -17,6 +17,8 @@ import { CategoryManagerComponent } from './category-manager/category-manager.co
 import { BankAccountComponent } from './bank-account/bank-account.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { OrderManagerComponent } from './order-manager/order-manager.component';
+import { CartReaderComponent } from './cart-reader/cart-reader.component';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -29,7 +31,9 @@ export const firebaseConfig = environment.firebaseConfig;
     CategoryManagerComponent,
     BankAccountComponent,
     EditProductComponent,
-    CarouselComponent
+    CarouselComponent,
+    OrderManagerComponent,
+    CartReaderComponent
   ],
   imports: [
     BrowserModule,

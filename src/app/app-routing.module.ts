@@ -6,6 +6,7 @@ import { CategoryManagerComponent } from './category-manager/category-manager.co
 import { LinksManagerComponent } from './links-manager/links-manager.component';
 import { BankAccountComponent } from './bank-account/bank-account.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { OrderManagerComponent } from './order-manager/order-manager.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './auth.guard';
 
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/console',pathMatch: 'full'},
   { path:'console', component:ConsoleComponent, canActivate:[AuthGuard]},
   { path:'editProduct', component:EditProductComponent, canActivate:[AuthGuard]},
+  { path:'orderManager', component:OrderManagerComponent, canActivate:[AuthGuard]},
   { path:'linksManager', component:LinksManagerComponent, canActivate:[AuthGuard]},
   { path:'categoryManager', component:CategoryManagerComponent, canActivate:[AuthGuard]},
   { path:'bankAccount', component:BankAccountComponent, canActivate:[AuthGuard]},
