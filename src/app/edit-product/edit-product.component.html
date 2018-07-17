@@ -16,12 +16,12 @@
         </div>
         <div class="card-body">
           <p>Name: {{prd.data.name}}</p>
-          <p class="small">{{prd.id}}</p>
+          <p class="small badge badge-info">{{prd.id}}</p>
           <table class="table table-sm table-hover">
               <tbody>
                 <tr>
                   <th scope="row">Price</th>
-                  <td *ngFor="let info of prd.data.trade_info">{{info.price}} CNY</td>
+                  <td *ngFor="let info of prd.data.trade_info"><span class="badge badge-danger">{{info.price}} CNY</span></td>
                 </tr>
                 <tr>
                   <th scope="row">Quantity</th>
@@ -104,19 +104,34 @@
           
         </div>
         
-          <textarea ref-textarea cols="30" rows="10" [value]="json2str(prd.data.sku)"></textarea>
+          <textarea ref-textarea class="bg bg-info" cols="30" rows="6" [value]="json2str(prd.data.sku)"></textarea>
           <button class="btn btn-danger btn-sm btn-block" (click)="editSku(prd.id,textarea.value)">Reset SKU</button>
         
         <div class="card=body">
           <p class="small" *ngFor="let j of prd.data.detail">{{j}}</p>
         </div>
-        <ngb-carousel *ngIf="prd.data.detail">
+        <!--
+           <ngb-carousel *ngIf="prd.data.detail">
             <ng-template ngbSlide *ngFor="let val of prd.data.detail">
               <img [src]="val" onError="this.src='./assets/placeholder.png'">
             </ng-template>
       </ngb-carousel>
-      <textarea ref-detailarr [value]="json2str(prd.data.detail)" cols="30" rows="10"></textarea>
+        -->
+        <div class="card-body">
+          <img *ngFor="let img of prd.data.detail" [src]="img" height="200" class="border border-primary rounded">
+        </div>
+       
+      <textarea ref-detailarr class="bg bg-info" [value]="json2str(prd.data.detail)" cols="30" rows="6"></textarea>
       <button class="btn btn-danger btn-sm btn-block" (click)="editDetail(prd.id,detailarr.value)">Edit detail images array</button>
+      <div class="card-footer d-flex justify-content-between">
+        <a [href]="prd.data.url" target="_blank">
+          <i class="fas fa-link"></i>
+        </a>
+        <button type="button" class="btn btn-success btn-sm" (click)="turnon(prd.id)">ON</button>
+        <button type="button" class="btn btn-success btn-sm" (click)="sendtohomepage(prd.id)">To Home</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="removefromhome(prd.id)">Off Home</button>{{prd.data.isHomePagePrd}}
+        <i class="fas fa-trash" (click)="delprd(prd.id)"></i>
+      </div>
       </div>
     </div>
   </div>
