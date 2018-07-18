@@ -94,10 +94,13 @@
                   </div>
                 </ng-template>
               </div>
+              <!--颜色，尺码经常用到的-->
+              <p>均码：หนึ่งขนาด<button class="btn btn-danger btn-sm" ngxClipboard [cbContent]="'หนึ่งขนาด'" >copy</button></p>
             </div>
         </div>
         <div class="card=body">
-          <p class="small" *ngFor="let i of prd.data.images">{{i}}</p>
+          <p class="small" *ngFor="let i of prd.data.images">{{i}} 
+            <button class="btn btn-danger btn-sm" ngxClipboard [cbContent]="liq(i)" >copy</button> </p>
         </div>
         <div>
           {{prd.data.sku | json}}
@@ -108,7 +111,9 @@
           <button class="btn btn-danger btn-sm btn-block" (click)="editSku(prd.id,textarea.value)">Reset SKU</button>
         
         <div class="card=body">
-          <p class="small" *ngFor="let j of prd.data.detail">{{j}}</p>
+          <p class="small" *ngFor="let j of prd.data.detail">{{j}}
+              <button class="btn btn-danger btn-sm" ngxClipboard [cbContent]="liq(j)" >copy</button>
+          </p>
         </div>
         <!--
            <ngb-carousel *ngIf="prd.data.detail">

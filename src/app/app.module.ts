@@ -7,6 +7,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ export const firebaseConfig = environment.firebaseConfig;
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
+    ClipboardModule,
     NgbModule.forRoot()
   ],
   providers: [],

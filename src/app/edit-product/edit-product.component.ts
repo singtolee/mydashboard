@@ -86,4 +86,8 @@ export class EditProductComponent implements OnInit {
 
   }
 
+  liq(i:string){
+    return ",\"image\":\"" + i + "\""
+  }
+
 }
