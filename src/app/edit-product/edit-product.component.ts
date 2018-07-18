@@ -3,6 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Product } from '../tools/Product'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ViewportScroller } from '@angular/common'
 
 @Component({
   selector: 'app-edit-product',
@@ -13,7 +14,7 @@ export class EditProductComponent implements OnInit {
   dir="PRODUCTS";
   products:any;
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore, private vps: ViewportScroller) {}
 
   ngOnInit() {
     this.products = this.loadPrd()
@@ -88,6 +89,12 @@ export class EditProductComponent implements OnInit {
 
   liq(i:string){
     return ",\"image\":\"" + i + "\""
+  }
+
+  goup(){
+    console.log(this.vps.getScrollPosition())
+    this.vps.scrollToPosition([0,0])
+    
   }
 
 }
