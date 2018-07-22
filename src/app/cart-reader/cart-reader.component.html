@@ -1,6 +1,8 @@
 <div *ngIf="cart | async as c">
     <div class="row">
       <p class="small text-center">{{c.name}}</p>
+      <span class="ml-1"> <a [href]="pid2url(c.pid)" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
+      <span class="ml-1"> <a [href]="gotoprd(c.pid)" target="_blank"><i class="fas fa-link"></i></a></span>
     </div>
     <div class="row">
       <div *ngFor="let item of c.items" class="col-6 col-md-4 col-lg-3">

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ImgZoomComponent } from '../img-zoom/img-zoom.component';
 
 interface Order {
   billUrl:string;
@@ -26,7 +28,7 @@ export class OrderManagerComponent implements OnInit {
   dir="ORDERS";
   orders:Observable<any>;
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore,private modalService: NgbModal) {}
 
   ngOnInit() {
     this.orders = this.loadOrders()
@@ -46,6 +48,12 @@ export class OrderManagerComponent implements OnInit {
 
   convert(a){
     return a.toDate()
+  }
+
+  zoomimg(url:string){
+    const modalRef = this.modalService.open(ImgZoomComponent,{centered:true});
+    modalRef.componentInstance.image = url;
+
   }
 
 }

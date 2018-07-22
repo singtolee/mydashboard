@@ -23,4 +23,15 @@ export class CartReaderComponent implements OnInit {
     this.cart = this.itemDoc.valueChanges()
   }
 
+  pid2url(pid){
+   // https://detail.1688.com/offer/567777231148.html
+   return "https://detail.1688.com/offer/" + pid + ".html"
+
+  }
+
+  gotoprd(pid){
+    //https://alitoyou.com/#/product/566550785403
+    return "https://alitoyou.com/#/product/" + pid
+  }
+
 }

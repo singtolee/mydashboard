@@ -1,6 +1,6 @@
 <div *ngFor="let order of orders | async">
-  <div class="card">
-    <div class="card-header">
+  <div class="card m-2">
+    <div class="card-header bg alert-info">
       <span>
         <i class="fas fa-clock"></i>{{convert(order.data.time) | date:'medium'}}</span>
       <span class="ml-1">
@@ -8,27 +8,22 @@
       <span class="badge badge-warning ml-1">discount:{{order.data.discount}}</span>
       <span class="badge badge-info ml-1">shipping fee:{{order.data.shippingCost}}</span>
       <span class="badge badge-info ml-1">total:{{order.data.total}}</span>
-      <span class="badge badge-danger ml-1">Total:{{order.data.grandTotal}}</span>
+      <span class="badge badge-danger ml-1">GT:{{order.data.grandTotal}}</span>
+      <span>
+        <img [src]="order.data.billUrl" height="30px" (click)="zoomimg(order.data.billUrl)">
+      </span>
     </div>
     <div class="card-body">
-      <div class="d-flex justify-content-between">
-        <div class="border border-warning">
-          <img [src]="order.data.billUrl" height="200">
-        </div>
-        <div class="border border-info">
-          <div *ngFor="let ss of order.data.status | keyvalue">
-           <span class="badge badge-info">{{ss.key}}</span>
-           <span class="text-danger">{{ss.value.title}}</span>
-           <i class="fas fa-clock ml-1"></i><span class="small">{{convert(ss.value.time) | date:'medium'}}</span> 
-          </div>
-          <button class="btn btn-success btn-sm">Update</button>
-        </div>
+      <div *ngFor="let cart of order.data.cartArray">
+        <app-cart-reader [id]="cart"></app-cart-reader>
       </div>
-      <div class="border border-danger">
-          <div *ngFor="let cart of order.data.cartArray">
-            <app-cart-reader [id]="cart"></app-cart-reader>
-          </div>
-        </div>
+    </div>
+    <div class="card-footer">
+        <div *ngFor="let ss of order.data.status | keyvalue">
+            <span class="badge badge-info">{{ss.key}}</span>
+            <span class="text-danger">{{ss.value.title}}</span>
+            <i class="fas fa-clock ml-1"></i><span class="small">{{convert(ss.value.time) | date:'medium'}}</span> 
+           </div>
     </div>
   </div>
 </div>

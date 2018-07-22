@@ -21,6 +21,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { OrderManagerComponent } from './order-manager/order-manager.component';
 import { CartReaderComponent } from './cart-reader/cart-reader.component';
 import { BannerManagerComponent } from './banner-manager/banner-manager.component';
+import { ImgZoomComponent } from './img-zoom/img-zoom.component';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -36,7 +37,8 @@ export const firebaseConfig = environment.firebaseConfig;
     CarouselComponent,
     OrderManagerComponent,
     CartReaderComponent,
-    BannerManagerComponent
+    BannerManagerComponent,
+    ImgZoomComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,9 @@ export const firebaseConfig = environment.firebaseConfig;
     AngularFireStorageModule,
     ClipboardModule,
     NgbModule.forRoot()
+  ],
+  entryComponents:[
+   ImgZoomComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
