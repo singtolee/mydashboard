@@ -53,7 +53,33 @@ export class OrderManagerComponent implements OnInit {
   zoomimg(url:string){
     const modalRef = this.modalService.open(ImgZoomComponent,{centered:true});
     modalRef.componentInstance.image = url;
+  }
 
+  s4(id:string){
+    this.db.doc(this.dir + '/' + id).update({'status.s4':{time:new Date(),title:'waiting for payment'}})
+  }
+  s5(id:string){
+    this.db.doc(this.dir + '/' + id).update({'status.s5':{time:new Date(),title:'processing'}})
+  }
+  s6(id:string){
+    this.db.doc(this.dir + '/' + id).update({'status.s6':{time:new Date(),title:'shipping to Thailand'}})
+  }
+  s7(id:string){
+    this.db.doc(this.dir + '/' + id).update({'status.s7':{time:new Date(),title:'Delivering'}})
+  }
+  s8(id:string){
+    this.db.doc(this.dir + '/' + id).update({'status.s8':{time:new Date(),title:'done'}})
+  }
+  s9(id:string){
+    this.db.doc(this.dir + '/' + id).update({'status.s9':{time:new Date(),title:'rejected'}})
+  }
+  s10(id:string){
+    this.db.doc(this.dir + '/' + id).update({'status.s99':{time:new Date(),title:'refunded'}})
+  }
+
+  archive(id:string){
+    console.log(id)
+    this.db.doc(this.dir + '/' + id).update({'done':true})
   }
 
 }
