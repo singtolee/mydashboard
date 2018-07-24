@@ -1,4 +1,9 @@
 <div class="container">
+  <div>
+    <span><button class="btn btn-success btn-sm" (click)="loadSta(true)">Load Status ON prd</button></span>
+    <span><button class="btn btn-info btn-sm" (click)="loadNext(true)"><i class="fas fa-arrow-circle-right"></i></button></span>
+    <span><button class="btn btn-danger btn-sm ml-5" (click)="loadSta(false)">Load Status OFF prd</button></span>
+  </div>
   <div class="row">
     <div *ngFor="let prd of products | async" class="col-12 m-2">
       <div class="card">
@@ -22,101 +27,106 @@
           <p>Name: {{prd.data.name}}</p>
           <p class="small badge badge-info">{{prd.id}}</p>
           <table class="table table-sm table-hover">
-              <tbody>
-                <tr>
-                  <th scope="row">Price</th>
-                  <td *ngFor="let info of prd.data.trade_info"><span class="badge badge-danger">{{info.price}} CNY</span></td>
-                </tr>
-                <tr>
-                  <th scope="row">Quantity</th>
-                  <td *ngFor="let info of prd.data.trade_info">>={{info.min_num}} pcs</td>
-                </tr>
-              </tbody>
-            </table>
+            <tbody>
+              <tr>
+                <th scope="row">Price</th>
+                <td *ngFor="let info of prd.data.trade_info">
+                  <span class="badge badge-danger">{{info.price}} CNY</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Quantity</th>
+                <td *ngFor="let info of prd.data.trade_info">>={{info.min_num}} pcs</td>
+              </tr>
+            </tbody>
+          </table>
           <p>Key word: {{prd.data.keyword}}</p>
           <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">Key Word</span>
-              </div>
-              <input type="text" [(ngModel)]="prd.data.keyword" class="form-control">
-              <div class="input-group-append">
-                  <button class="btn btn-outline-success btn-sm" type="button" (click)="resetKeyword(prd.data.keyword,prd.id)">Reset Key word</button>
-              </div>
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Key Word</span>
+            </div>
+            <input type="text" [(ngModel)]="prd.data.keyword" class="form-control">
+            <div class="input-group-append">
+              <button class="btn btn-outline-success btn-sm" type="button" (click)="resetKeyword(prd.data.keyword,prd.id)">Reset Key word</button>
+            </div>
           </div>
           <table class="table table-sm table-hover">
-              <tbody>
-                <tr>
-                  <td>Sales count</td>
-                  <td>Score</td>
-                  <td>Comment count</td>
-                  <td>Original price</td>
-                </tr>
-                <tr>
-                  <td>{{prd.data.sales_count || 0}}</td>
-                  <td>{{prd.data.score || 0}}</td>
-                  <td>{{prd.data.comment_count || 0}}</td>
-                  <td>{{prd.data.original_price}}</td>
-                </tr>
-              </tbody>
-            </table>
+            <tbody>
+              <tr>
+                <td>Sales count</td>
+                <td>Score</td>
+                <td>Comment count</td>
+                <td>Original price</td>
+              </tr>
+              <tr>
+                <td>{{prd.data.sales_count || 0}}</td>
+                <td>{{prd.data.score || 0}}</td>
+                <td>{{prd.data.comment_count || 0}}</td>
+                <td>{{prd.data.original_price}}</td>
+              </tr>
+            </tbody>
+          </table>
           <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">Unit weight(kg)</span>
-              </div>
-              <input type="number" step="0.05" min="0.05" [(ngModel)]="prd.data.uw" class="form-control">
-              <div class="input-group-append">
-                  <button class="btn btn-outline-success btn-sm" type="button" (click)="resetUW(prd.data.uw,prd.id)">Reset Unit weight</button>
-              </div>
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Unit weight(kg)</span>
+            </div>
+            <input type="number" step="0.05" min="0.05" [(ngModel)]="prd.data.uw" class="form-control">
+            <div class="input-group-append">
+              <button class="btn btn-outline-success btn-sm" type="button" (click)="resetUW(prd.data.uw,prd.id)">Reset Unit weight</button>
+            </div>
           </div>
         </div>
-        <div class="card-body" >
+        <div class="card-body">
           <div *ngIf="isObject(prd.data.sku[0])">
-              <div *ngFor="let s of prd.data.sku" class="p-1">
-                <div *ngIf="s.values[0].image; else noImage">
-                  <div class="card">
-                    <div class="card-header">
-                      {{s.label}}
-                    </div>
-                    <div class="card-body">
-                      <span *ngFor="let val of s.values" class="mr-1">
-                        <img class="border border-secondary rounded" [src]="val.image" height="40px" width="40px">
-                      </span>
-                      <app-carousel [sku]="prd.data.sku[0].values"></app-carousel>
-                    </div>
+            <div *ngFor="let s of prd.data.sku" class="p-1">
+              <div *ngIf="s.values[0].image; else noImage">
+                <div class="card">
+                  <div class="card-header">
+                    {{s.label}}
+                  </div>
+                  <div class="card-body">
+                    <span *ngFor="let val of s.values" class="mr-1">
+                      <img class="border border-secondary rounded" [src]="val.image" height="40px" width="40px">
+                    </span>
+                    <app-carousel [sku]="prd.data.sku[0].values"></app-carousel>
                   </div>
                 </div>
-                <ng-template #noImage>
-                  <div class="card">
-                    <div class="card-header">
-                      {{s.label}}
-                    </div>
-                    <div class="card-body">
-                      <span *ngFor="let val of s.values" class="mr-1">
-                        <button type="button" class="btn btn-outline-secondary btn-sm">{{val.desc}}</button>
-                      </span>
-                    </div>
-                  </div>
-                </ng-template>
               </div>
-              <!--颜色，尺码经常用到的-->
-              <p>均码：หนึ่งขนาด<button class="btn btn-danger btn-sm" ngxClipboard [cbContent]="'หนึ่งขนาด'" >copy</button></p>
+              <ng-template #noImage>
+                <div class="card">
+                  <div class="card-header">
+                    {{s.label}}
+                  </div>
+                  <div class="card-body">
+                    <span *ngFor="let val of s.values" class="mr-1">
+                      <button type="button" class="btn btn-outline-secondary btn-sm">{{val.desc}}</button>
+                    </span>
+                  </div>
+                </div>
+              </ng-template>
             </div>
+            <!--颜色，尺码经常用到的-->
+            <p>均码：หนึ่งขนาด
+              <button class="btn btn-danger btn-sm" ngxClipboard [cbContent]="'หนึ่งขนาด'">copy</button>
+            </p>
+          </div>
         </div>
         <div class="card=body">
-          <p class="small" *ngFor="let i of prd.data.images">{{i}} 
-            <button class="btn btn-danger btn-sm" ngxClipboard [cbContent]="liq(i)" >copy</button> </p>
+          <p class="small" *ngFor="let i of prd.data.images">{{i}}
+            <button class="btn btn-danger btn-sm" ngxClipboard [cbContent]="liq(i)">copy</button>
+          </p>
         </div>
         <div>
           {{prd.data.sku | json}}
-          
+
         </div>
-        
-          <textarea ref-textarea class="bg bg-info" cols="30" rows="6" [value]="json2str(prd.data.sku)"></textarea>
-          <button class="btn btn-danger btn-sm btn-block" (click)="editSku(prd.id,textarea.value)">Reset SKU</button>
-        
+
+        <textarea ref-textarea class="bg bg-info" cols="30" rows="6" [value]="json2str(prd.data.sku)"></textarea>
+        <button class="btn btn-danger btn-sm btn-block" (click)="editSku(prd.id,textarea.value)">Reset SKU</button>
+
         <div class="card=body">
           <p class="small" *ngFor="let j of prd.data.detail; let n = index">{{j}}
-              <button class="btn btn-success btn-sm" ngxClipboard [cbContent]="liq(j)" >copy</button>
+            <button class="btn btn-success btn-sm" ngxClipboard [cbContent]="liq(j)">copy</button>
           </p>
         </div>
         <!--
@@ -130,21 +140,21 @@
           <div class="row">
             <div *ngFor="let img of prd.data.detail;let n = index" class="col col-6 col-md-3">
               <img [src]="img" class="border border-primary rounded">
-              <button class="btn btn-danger btn-sm ml-2" (click)="prd.data.detail.splice(n,1)" >DELETE</button>
+              <button class="btn btn-danger btn-sm ml-2" (click)="prd.data.detail.splice(n,1)">DELETE</button>
             </div>
           </div>
         </div>
-      <textarea ref-detailarr class="bg bg-info" [value]="json2str(prd.data.detail)" cols="30" rows="6"></textarea>
-      <button class="btn btn-danger btn-sm btn-block" (click)="editDetail(prd.id,detailarr.value)">Edit detail images array</button>
-      <div class="card-footer d-flex justify-content-between">
-        <a [href]="prd.data.url" target="_blank">
-          <i class="fas fa-link"></i>
-        </a>
-        <button type="button" class="btn btn-success btn-sm" (click)="turnon(prd.id)">ON</button>
-        <button type="button" class="btn btn-success btn-sm" (click)="sendtohomepage(prd.id)">To Home</button>
-        <button type="button" class="btn btn-danger btn-sm" (click)="removefromhome(prd.id)">Off Home</button>{{prd.data.isHomePagePrd}}
-        <i class="fas fa-trash" (click)="delprd(prd.id)"></i>
-      </div>
+        <textarea ref-detailarr class="bg bg-info" [value]="json2str(prd.data.detail)" cols="30" rows="6"></textarea>
+        <button class="btn btn-danger btn-sm btn-block" (click)="editDetail(prd.id,detailarr.value)">Edit detail images array</button>
+        <div class="card-footer d-flex justify-content-between">
+          <a [href]="prd.data.url" target="_blank">
+            <i class="fas fa-link"></i>
+          </a>
+          <button type="button" class="btn btn-success btn-sm" (click)="turnon(prd.id)">ON</button>
+          <button type="button" class="btn btn-success btn-sm" (click)="sendtohomepage(prd.id)">To Home</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="removefromhome(prd.id)">Off Home</button>{{prd.data.isHomePagePrd}}
+          <i class="fas fa-trash" (click)="delprd(prd.id)"></i>
+        </div>
       </div>
     </div>
   </div>

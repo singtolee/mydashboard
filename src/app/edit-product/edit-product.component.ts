@@ -13,16 +13,21 @@ import { ViewportScroller } from '@angular/common'
 export class EditProductComponent implements OnInit {
   dir="PRODUCTS";
   products:any;
+  doc:any;
 
   constructor(private db: AngularFirestore, private vps: ViewportScroller) {}
 
   ngOnInit() {
-    this.products = this.loadPrd()
+    //this.products = this.loadPrd(this.sta)
   }
 
-  loadPrd(){
+  loadSta(s:boolean){
+    this.products = this.loadPrd(s)
+  }
+
+  loadPrd(s:boolean){
     return this.db.collection(this.dir, ref=>{
-      return ref.where('status','==',false)
+      return ref.where('status','==',s)
       .orderBy("sales_count","desc")
       .orderBy("score", "desc")
       .orderBy("comment_count", "desc")
@@ -31,6 +36,25 @@ export class EditProductComponent implements OnInit {
       return actions.map(a=>{
         const data = a.payload.doc.data() as Product;
         const id = a.payload.doc.id;
+        this.doc = a.payload.doc;
+        return {id,data};
+      })
+    }))
+  }
+
+  loadNext(s:boolean){
+    this.products = this.db.collection(this.dir, ref=>{
+      return ref.where('status','==',s)
+      .orderBy("sales_count","desc")
+      .orderBy("score", "desc")
+      .orderBy("comment_count", "desc")
+      .startAfter(this.doc)
+      .limit(1)
+    }).snapshotChanges().pipe(map(actions=>{
+      return actions.map(a=>{
+        const data = a.payload.doc.data() as Product;
+        const id = a.payload.doc.id;
+        this.doc = a.payload.doc;
         return {id,data};
       })
     }))
