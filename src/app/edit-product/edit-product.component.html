@@ -11,6 +11,7 @@
           <a [href]="prd.data.url" target="_blank">
             <i class="fas fa-link"></i>
           </a>
+          <small>{{prd.data.trade_info[0].price}} CNY</small>
           <button type="button" class="btn btn-success btn-sm" (click)="turnon(prd.id)">ON</button>
           <button type="button" class="btn btn-success btn-sm" (click)="sendtohomepage(prd.id)">To Home</button>
           <button type="button" class="btn btn-danger btn-sm" (click)="removefromhome(prd.id)">Off Home</button>{{prd.data.isHomePagePrd}}
@@ -160,3 +161,4 @@
   </div>
 </div>
 <i class="fas fa-arrow-alt-circle-up fa-2x text-danger" id="myBtn" (click)="goup()"></i>
+<button id="btm" class="btn btn-primary btn-block" (click)="loadNext(true)">NEXT</button>

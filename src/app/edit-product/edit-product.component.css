@@ -5,6 +5,13 @@ img {
 
 #myBtn {
     position: fixed;
-    bottom: 30px;
+    bottom: 45px;
     right: 30px;
+  }
+
+  #btm {
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
   }
