@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -29,7 +29,9 @@ export class BannerManagerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.sub.unsubscribe()
+    if(this.sub){
+      this.sub.unsubscribe()
+    }
   }
 
   savebannerimg(){
