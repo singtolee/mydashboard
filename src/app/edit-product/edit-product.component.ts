@@ -26,8 +26,6 @@ export class EditProductComponent implements OnInit {
   sk:string;
   onoff:boolean;
 
-
-
   dir="PRODUCTS";
   products:any;
   doc:any;
@@ -35,12 +33,15 @@ export class EditProductComponent implements OnInit {
   constructor(private db: AngularFirestore, private vps: ViewportScroller) {}
 
   ngOnInit() {
-    //this.products = this.loadPrd(this.sta)
+    /*
     this.categoriesCol = this.db.collection<Category>(this.cdir, ref =>{
       return ref.orderBy('displayOrder')
     });
     this.categories = this.categoriesCol.valueChanges();
+    */
   }
+
+  /*
 
   myload(){
     console.log("MMMM???")
@@ -66,6 +67,8 @@ export class EditProductComponent implements OnInit {
 
   }
 
+  */
+
   loadSta(s:boolean){
     this.products = this.loadPrd(s)
   }
@@ -90,9 +93,9 @@ export class EditProductComponent implements OnInit {
   loadNext(s:boolean){
     this.products = this.db.collection(this.dir, ref=>{
       return ref.where('status','==',s)
-      .orderBy("sales_count","desc")
-      .orderBy("score", "desc")
-      .orderBy("comment_count", "desc")
+      //.orderBy("sales_count","desc")
+      //.orderBy("score", "desc")
+      //.orderBy("comment_count", "desc")
       .startAfter(this.doc)
       .limit(1)
     }).snapshotChanges().pipe(map(actions=>{

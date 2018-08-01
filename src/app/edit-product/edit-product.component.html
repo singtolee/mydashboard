@@ -1,22 +1,4 @@
 <div class="container">
-  <div class="btn-group btn-group-toggle m-2" ngbRadioGroup name="radioBasic" [(ngModel)]="sk">
-    <label ngbButtonLabel class="btn-primary" *ngFor="let cate of categories | async">
-      <input ngbButton type="radio" [value]="cate.keyWord">{{cate.keyWord}}
-    </label>
-  </div>
-  <div class="btn-group btn-group-toggle m-2" ngbRadioGroup name="radioBasic" [(ngModel)]="onoff">
-      <label ngbButtonLabel class="btn-info">
-        <input ngbButton type="radio" value="true">ON
-      </label>
-      <label ngbButtonLabel class="btn-info">
-          <input ngbButton type="radio" value="false">OFF
-        </label>
-    </div>
-    <button class="btn btn-success m-2" (click)="myload()">{{sk}}--LOAD--{{onoff}}</button>
-
-
-
-
   <div>
     <span>
       <button class="btn btn-success btn-sm" (click)="loadSta(true)">Load Status ON prd</button>
