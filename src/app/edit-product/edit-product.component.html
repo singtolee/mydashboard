@@ -1,9 +1,37 @@
 <div class="container">
-  <div>
-    <span><button class="btn btn-success btn-sm" (click)="loadSta(true)">Load Status ON prd</button></span>
-    <span><button class="btn btn-info btn-sm" (click)="loadNext(true)"><i class="fas fa-arrow-circle-right"></i></button></span>
-    <span><button class="btn btn-danger btn-sm ml-5" (click)="loadSta(false)">Load Status OFF prd</button></span>
+  <div class="btn-group btn-group-toggle m-2" ngbRadioGroup name="radioBasic" [(ngModel)]="sk">
+    <label ngbButtonLabel class="btn-primary" *ngFor="let cate of categories | async">
+      <input ngbButton type="radio" [value]="cate.keyWord">{{cate.keyWord}}
+    </label>
   </div>
+  <div class="btn-group btn-group-toggle m-2" ngbRadioGroup name="radioBasic" [(ngModel)]="onoff">
+      <label ngbButtonLabel class="btn-info">
+        <input ngbButton type="radio" value="true">ON
+      </label>
+      <label ngbButtonLabel class="btn-info">
+          <input ngbButton type="radio" value="false">OFF
+        </label>
+    </div>
+    <button class="btn btn-success m-2" (click)="myload()">{{sk}}--LOAD--{{onoff}}</button>
+
+
+
+
+  <div>
+    <span>
+      <button class="btn btn-success btn-sm" (click)="loadSta(true)">Load Status ON prd</button>
+    </span>
+    <span>
+      <button class="btn btn-info btn-sm" (click)="loadNext(true)">
+        <i class="fas fa-arrow-circle-right"></i>
+      </button>
+    </span>
+    <span>
+      <button class="btn btn-danger btn-sm ml-5" (click)="loadSta(false)">Load Status OFF prd</button>
+    </span>
+  </div>
+
+  
   <div class="row">
     <div *ngFor="let prd of products | async" class="col-12 m-2">
       <div class="card">
@@ -28,6 +56,16 @@
           <p>Name: {{prd.data.name}}</p>
           <p>Name: {{prd.data.thName}}</p>
           <p class="small badge badge-info">{{prd.id}}</p>
+          <p class="small text-primary">{{prd.data.price}}</p>
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Price</span>
+            </div>
+            <input type="text" [(ngModel)]="prd.data.price" class="form-control">
+            <div class="input-group-append">
+              <button class="btn btn-outline-success btn-sm" type="button" (click)="resetPrice(prd.data.price,prd.id)">Reset Key Price</button>
+            </div>
+          </div>
           <table class="table table-sm table-hover">
             <tbody>
               <tr>
@@ -42,6 +80,9 @@
               </tr>
             </tbody>
           </table>
+          <p>{{prd.data.trade_info | json}}</p>
+          <textarea ref-tInfo class="bg bg-info" cols="60" rows="6" [value]="json2str(prd.data.trade_info)"></textarea>
+          <button class="btn btn-danger btn-sm btn-block" (click)="editTinfo(prd.id,tInfo.value)">Reset Trade_Info</button>
           <p>Key word: {{prd.data.keyword}}</p>
           <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">

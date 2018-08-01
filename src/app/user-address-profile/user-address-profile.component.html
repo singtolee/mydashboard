@@ -1,5 +1,6 @@
-<p>
-  {{user | async | json}}
-
+<p *ngIf="user | async as u">
+  <i class="fas fa-user"></i>{{u.displayName}}
 </p>
-<p>{{address | async | json}}</p>
+<p *ngIf="address | async as ads">
+  <i class="fas fa-map-marker-alt"></i>{{ads.address}}-{{ads.city}}-{{ads.consignee}}-{{ads.phone}}
+</p>

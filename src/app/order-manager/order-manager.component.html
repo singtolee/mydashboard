@@ -1,46 +1,51 @@
-<div *ngFor="let order of orders | async">
-  <div class="card m-2">
-    <div class="card-header bg alert-info">
-      <span>
-        <i class="fas fa-clock"></i>{{convert(order.data.time) | date:'medium'}}</span>
-      <span class="ml-1">
-        <i class="fas fa-hand-holding-usd"></i>{{order.data.paymentMe}}</span>
-      <span class="badge badge-warning ml-1">discount:{{order.data.discount}}</span>
-      <span class="badge badge-info ml-1">shipping fee:{{order.data.shippingCost}}</span>
-      <span class="badge badge-info ml-1">total:{{order.data.total}}</span>
-      <span class="badge badge-danger ml-1">GT:{{order.data.grandTotal}}</span>
-      <span>
-        <img [src]="order.data.billUrl" height="30px" (click)="zoomimg(order.data.billUrl)">
-      </span>
-      <span><button class="btn btn-primary btn-sm" (click)="archive(order.id)">ARCHIVE</button></span>
-    </div>
-    <div class="card-header">
-      <app-user-address-profile [uid]="order.data.uid"></app-user-address-profile>
-    </div>
-    <div class="card-body">
-      <div *ngFor="let cart of order.data.cartArray">
-        <app-cart-reader [id]="cart"></app-cart-reader>
-      </div>
-    </div>
-    <div class="card-footer">
-      <div *ngFor="let ss of order.data.status | keyvalue">
-        <span class="badge badge-info">{{ss.key}}</span>
-        <span class="text-danger">{{ss.value.title}}</span>
-        <i class="fas fa-clock ml-1"></i>
-        <span class="small">{{convert(ss.value.time) | date:'medium'}}</span>
-      </div>
-      <div>
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel *ngFor="let order of orders | async; even as ev">
+    <ng-template  ngbPanelTitle>
+      <div class="card-header" [class.alert-danger]="ev">
         <span>
-          <button class="btn btn-success btn-sm mr-1" (click)="s4(order.id)">S4 Waiting payment</button>
-          <button class="btn btn-info btn-sm mr-1"  (click)="s5(order.id)">S5 Processing</button>
-          <button class="btn btn-warning btn-sm mr-1"  (click)="s6(order.id)">S6 Shipping to BKK</button>
-          <button class="btn btn-success btn-sm mr-1"  (click)="s7(order.id)">S7 Delivering</button>
-          <button class="btn btn-primary btn-sm mr-1"  (click)="s8(order.id)">S8 Done</button>
-          <button class="btn btn-danger btn-sm mr-1"  (click)="s9(order.id)">S9 Rejected</button>
-          <button class="btn btn-secondary btn-sm mr-1"  (click)="s10(order.id)">S10 Refunded</button>
+          <i class="fas fa-clock"></i>{{convert(order.data.time) | date:'medium'}}</span>
+        <span class="ml-1">
+          <i class="fas fa-hand-holding-usd"></i>{{order.data.paymentMe}}</span>
+        <span class="badge badge-warning ml-1">discount:{{order.data.discount}}</span>
+        <span class="badge badge-info ml-1">shipping fee:{{order.data.shippingCost}}</span>
+        <span class="badge badge-info ml-1">total:{{order.data.total}}</span>
+        <span class="badge badge-danger ml-1">GT:{{order.data.grandTotal}}</span>
+        <span>
+          <img [src]="order.data.billUrl" height="30px" (click)="zoomimg(order.data.billUrl)">
         </span>
-        
+        <span>
+          <button class="btn btn-primary btn-sm" (click)="archive(order.id)">ARCHIVE</button>
+        </span>
+        <span>
+          <app-user-address-profile [uid]="order.data.uid"></app-user-address-profile>
+        </span>
       </div>
-    </div>
-  </div>
-</div>
+    </ng-template>
+    <ng-template ngbPanelContent>
+      <div class="card-body">
+        <div *ngFor="let cart of order.data.cartArray">
+          <app-cart-reader [id]="cart"></app-cart-reader>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div *ngFor="let ss of order.data.status | keyvalue">
+          <span class="badge badge-info">{{ss.key}}</span>
+          <span class="text-danger">{{ss.value.title}}</span>
+          <i class="fas fa-clock ml-1"></i>
+          <span class="small">{{convert(ss.value.time) | date:'medium'}}</span>
+        </div>
+        <div>
+          <span>
+            <button class="btn btn-success btn-sm mr-1" (click)="s4(order.id)">S4 Waiting payment</button>
+            <button class="btn btn-info btn-sm mr-1" (click)="s5(order.id)">S5 Processing</button>
+            <button class="btn btn-warning btn-sm mr-1" (click)="s6(order.id)">S6 Shipping to BKK</button>
+            <button class="btn btn-success btn-sm mr-1" (click)="s7(order.id)">S7 Delivering</button>
+            <button class="btn btn-primary btn-sm mr-1" (click)="s8(order.id)">S8 Done</button>
+            <button class="btn btn-danger btn-sm mr-1" (click)="s9(order.id)">S9 Rejected</button>
+            <button class="btn btn-secondary btn-sm mr-1" (click)="s10(order.id)">S10 Refunded</button>
+          </span>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
