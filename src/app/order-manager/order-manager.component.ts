@@ -8,6 +8,7 @@ import { ImgZoomComponent } from '../img-zoom/img-zoom.component';
 interface Order {
   billUrl:string;
   discount:number;
+  done:boolean;
   paymentMe:string;
   grandTotal:number;
   shippingCost:number;
@@ -36,7 +37,8 @@ export class OrderManagerComponent implements OnInit {
 
   loadOrders(){
     return this.db.collection(this.dir, ref=>{
-      return ref.orderBy('time','desc')
+      return ref.where('done','==',false)
+                .orderBy('time','desc')
     }).snapshotChanges().pipe(map(actions=>{
       return actions.map(a=>{
         const data = a.payload.doc.data() as Order;
