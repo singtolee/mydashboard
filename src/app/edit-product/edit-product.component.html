@@ -37,9 +37,11 @@
         <div class="card-body">
           <p>Name: {{prd.data.name}}</p>
           <p>Name: {{prd.data.thName}}</p>
-          <p class="small badge badge-info">{{prd.id}}</p>
+          
+          <!--
+            <p class="small badge badge-info">{{prd.id}}</p>
           <p class="small text-primary">{{prd.data.price}}</p>
-          <div class="input-group input-group-sm mb-3">
+             <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Price</span>
             </div>
@@ -48,6 +50,13 @@
               <button class="btn btn-outline-success btn-sm" type="button" (click)="resetPrice(prd.data.price,prd.id)">Reset Key Price</button>
             </div>
           </div>
+          -->
+
+          <!--
+
+            
+          -->
+         
           <table class="table table-sm table-hover">
             <tbody>
               <tr>
@@ -62,9 +71,13 @@
               </tr>
             </tbody>
           </table>
-          <p>{{prd.data.trade_info | json}}</p>
-          <textarea ref-tInfo class="bg bg-info" cols="60" rows="6" [value]="json2str(prd.data.trade_info)"></textarea>
+          <!--
+            <p>{{prd.data.trade_info | json}}</p>
+            <textarea ref-tInfo class="bg bg-info" cols="60" rows="6" [value]="json2str(prd.data.trade_info)"></textarea>
           <button class="btn btn-danger btn-sm btn-block" (click)="editTinfo(prd.id,tInfo.value)">Reset Trade_Info</button>
+          -->
+          
+          
           <p>Key word: {{prd.data.keyword}}</p>
           <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
@@ -75,7 +88,9 @@
               <button class="btn btn-outline-success btn-sm" type="button" (click)="resetKeyword(prd.data.keyword,prd.id)">Reset Key word</button>
             </div>
           </div>
-          <table class="table table-sm table-hover">
+          <!--
+
+             <table class="table table-sm table-hover">
             <tbody>
               <tr>
                 <td>Sales count</td>
@@ -91,6 +106,9 @@
               </tr>
             </tbody>
           </table>
+          -->
+
+         
           <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Unit weight(kg)</span>
@@ -107,7 +125,7 @@
               <div *ngIf="s.values[0].image; else noImage">
                 <div class="card">
                   <div class="card-header">
-                    {{s.label}}---{{s.thLabel}}
+                    {{s.label}}--TH:--{{s.thLabel}}
                   </div>
                   <div class="card-body">
                     <span *ngFor="let val of s.values" class="mr-1">
@@ -120,20 +138,21 @@
               <ng-template #noImage>
                 <div class="card">
                   <div class="card-header">
-                    {{s.label}}---{{s.thLabel}}
+                    {{s.label}}--TH:--{{s.thLabel}}
                   </div>
                   <div class="card-body">
                     <span *ngFor="let val of s.values" class="mr-1">
-                      <button type="button" class="btn btn-outline-secondary btn-sm">{{val.desc}}---{{val.thDesc}}</button>
+                      <button type="button" class="btn btn-outline-secondary btn-sm">{{val.desc}}--TH:--{{val.thDesc}}</button>
                     </span>
                   </div>
                 </div>
               </ng-template>
             </div>
-            <!--颜色，尺码经常用到的-->
-            <p>均码：หนึ่งขนาด
+            <!--颜色，尺码经常用到的
+             <p>均码：หนึ่งขนาด
               <button class="btn btn-danger btn-sm" ngxClipboard [cbContent]="'หนึ่งขนาด'">copy</button>
             </p>
+            -->
           </div>
         </div>
         <div class="card=body">
@@ -143,9 +162,7 @@
         </div>
         <div>
           {{prd.data.sku | json}}
-
         </div>
-
         <textarea ref-textarea class="bg bg-info" cols="30" rows="6" [value]="json2str(prd.data.sku)"></textarea>
         <button class="btn btn-danger btn-sm btn-block" (click)="editSku(prd.id,textarea.value)">Reset SKU</button>
 
