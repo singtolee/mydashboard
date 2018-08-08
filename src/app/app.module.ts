@@ -25,6 +25,7 @@ import { ImgZoomComponent } from './img-zoom/img-zoom.component';
 import { UserAddressProfileComponent } from './user-address-profile/user-address-profile.component';
 import { PrdListComponent } from './prd-list/prd-list.component';
 import { PrdCardComponent } from './prd-card/prd-card.component';
+import { ProductsViewByKeywordComponent } from './products-view-by-keyword/products-view-by-keyword.component';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -44,7 +45,8 @@ export const firebaseConfig = environment.firebaseConfig;
     ImgZoomComponent,
     UserAddressProfileComponent,
     PrdListComponent,
-    PrdCardComponent
+    PrdCardComponent,
+    ProductsViewByKeywordComponent
   ],
   imports: [
     BrowserModule,

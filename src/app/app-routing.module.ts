@@ -6,6 +6,7 @@ import { CategoryManagerComponent } from './category-manager/category-manager.co
 import { LinksManagerComponent } from './links-manager/links-manager.component';
 import { BankAccountComponent } from './bank-account/bank-account.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { ProductsViewByKeywordComponent } from './products-view-by-keyword/products-view-by-keyword.component';
 import { OrderManagerComponent } from './order-manager/order-manager.component';
 import { BannerManagerComponent } from './banner-manager/banner-manager.component';
 import { PrdListComponent } from './prd-list/prd-list.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path:'console', component:ConsoleComponent, canActivate:[AuthGuard]},
   { path:'prdlist',component:PrdListComponent,canActivate:[AuthGuard]},
   { path:'editProduct', component:EditProductComponent, canActivate:[AuthGuard]},
+  { path:'keywordPrd', component:ProductsViewByKeywordComponent, canActivate:[AuthGuard]},
   { path:'orderManager', component:OrderManagerComponent, canActivate:[AuthGuard]},
   { path:'linksManager', component:LinksManagerComponent, canActivate:[AuthGuard]},
   { path:'bannerManager', component:BannerManagerComponent, canActivate:[AuthGuard]},
@@ -35,6 +37,7 @@ export const routingComponents = [
   ConsoleComponent,
   PrdListComponent,
   EditProductComponent,
+  ProductsViewByKeywordComponent,
   LoginComponent,
   OrderManagerComponent,
   BannerManagerComponent,

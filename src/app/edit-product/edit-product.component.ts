@@ -167,7 +167,6 @@ export class EditProductComponent implements OnInit {
 
   json2str(json:any){
     return JSON.stringify(json)
-
   }
 
   liq(i:string){
