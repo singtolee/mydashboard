@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Product } from '../tools/Product';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+interface Category {
+  title: string;
+  keyWord:string;
+  imgUrl:string;
+  displayOrder:number;
+}
 
 @Component({
   selector: 'app-prd-list',
@@ -10,13 +18,52 @@ import { Observable } from 'rxjs';
 })
 export class PrdListComponent implements OnInit {
 
-  prds:Observable<Product[]>;
-  dir = "PPP";
+  cdir = "CATEGORIES";
+  categories: Observable<Category[]>;
+  private categoriesCol: AngularFirestoreCollection<Category>;
+
+  kw:string;
+
+  dir="PRODUCTS";
+  prds:any;
+  doc:any;
 
   constructor(private db:AngularFirestore) { }
 
   ngOnInit() {
-    this.prds = this.db.collection<Product>(this.dir).valueChanges()
+    this.categoriesCol = this.db.collection<Category>(this.cdir,ref =>{
+      return ref.orderBy('displayOrder')
+    });
+    this.categories = this.categoriesCol.valueChanges();
+  }
+
+  loadprd(){
+    this.prds =  this.db.collection(this.dir, ref=>{
+      return ref.where('keyword','==',this.kw)
+      .limit(8)
+    }).snapshotChanges().pipe(map(actions=>{
+      return actions.map(a=>{
+        const data = a.payload.doc.data() as Product;
+        const id = a.payload.doc.id;
+        this.doc = a.payload.doc;
+        return {id,data};
+      })
+    })) 
+  }
+  loadmore(){
+    this.prds =  this.db.collection(this.dir, ref=>{
+      return ref.where('keyword','==',this.kw)
+      .startAfter(this.doc)
+      .limit(8)
+    }).snapshotChanges().pipe(map(actions=>{
+      return actions.map(a=>{
+        const data = a.payload.doc.data() as Product;
+        const id = a.payload.doc.id;
+        this.doc = a.payload.doc;
+        return {id,data};
+      })
+    })) 
+
   }
 
 }

@@ -1,7 +1,16 @@
 <div class="container">
   <div class="row">
+    <select class="mt-2" name="keyword" id="keyword" [(ngModel)]="kw">
+      <option *ngFor="let cate of categories | async" [value]="cate.keyWord">{{cate.keyWord}}</option>
+    </select>
+    <button class="btn btn-primary btn-sm ml-2" [disabled]="!kw" (click)="loadprd()">LOAD</button>
+    <button class="btn btn-success btn-sm ml-2" [disabled]="!kw" (click)="loadmore()">LOAD MORE</button>
+  </div>
+  <div class="row">
     <div *ngFor="let prd of prds | async" class="col-sm-12 col-md-4 col-lg-3 mb-2 bg-light">
       <app-prd-card [prd]="prd"></app-prd-card>
     </div>
+  </div>
+  <div class="row">
   </div>
 </div>
