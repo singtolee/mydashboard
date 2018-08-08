@@ -66,6 +66,22 @@ export class ProductsViewByKeywordComponent implements OnInit {
     })) 
   }
 
+  loadNext(){
+    this.prds = this.db.collection(this.dir, ref=>{
+      return ref.where('status','==',true)
+      .where('keyword','==',this.kw)
+      .startAfter(this.doc)
+      .limit(1)
+    }).snapshotChanges().pipe(map(actions=>{
+      return actions.map(a=>{
+        const data = a.payload.doc.data() as Product;
+        const id = a.payload.doc.id;
+        this.doc = a.payload.doc;
+        return {id,data};
+      })
+    }))
+  }
+
   isObject(sth) {
     return typeof sth === 'object';
   }

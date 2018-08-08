@@ -5,6 +5,7 @@
     </select>
     <button class="btn btn-primary btn-sm ml-2" [disabled]="!kw" (click)="loadprdon()">LOAD ON</button>
     <button class="btn btn-success btn-sm ml-2" [disabled]="!kw" (click)="loadprdoff()">LOAD OFF</button>
+    <button class="btn btn-success btn-sm ml-2" [disabled]="!kw" (click)="loadNext()">LOAD NEXT</button>
   </div>
   <div class="row">
     <div *ngFor="let prd of prds | async" class="col-12">
