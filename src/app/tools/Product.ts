@@ -21,4 +21,5 @@ export class Product {
   comment_count:number;
   uw:number;
   status: boolean;
+  time:Date;
 }

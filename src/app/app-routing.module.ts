@@ -8,12 +8,14 @@ import { BankAccountComponent } from './bank-account/bank-account.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { OrderManagerComponent } from './order-manager/order-manager.component';
 import { BannerManagerComponent } from './banner-manager/banner-manager.component';
+import { PrdListComponent } from './prd-list/prd-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/console',pathMatch: 'full'},
   { path:'console', component:ConsoleComponent, canActivate:[AuthGuard]},
+  { path:'prdlist',component:PrdListComponent,canActivate:[AuthGuard]},
   { path:'editProduct', component:EditProductComponent, canActivate:[AuthGuard]},
   { path:'orderManager', component:OrderManagerComponent, canActivate:[AuthGuard]},
   { path:'linksManager', component:LinksManagerComponent, canActivate:[AuthGuard]},
@@ -31,6 +33,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponents = [
   ConsoleComponent,
+  PrdListComponent,
   EditProductComponent,
   LoginComponent,
   OrderManagerComponent,

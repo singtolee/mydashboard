@@ -23,6 +23,8 @@ import { CartReaderComponent } from './cart-reader/cart-reader.component';
 import { BannerManagerComponent } from './banner-manager/banner-manager.component';
 import { ImgZoomComponent } from './img-zoom/img-zoom.component';
 import { UserAddressProfileComponent } from './user-address-profile/user-address-profile.component';
+import { PrdListComponent } from './prd-list/prd-list.component';
+import { PrdCardComponent } from './prd-card/prd-card.component';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -40,7 +42,9 @@ export const firebaseConfig = environment.firebaseConfig;
     CartReaderComponent,
     BannerManagerComponent,
     ImgZoomComponent,
-    UserAddressProfileComponent
+    UserAddressProfileComponent,
+    PrdListComponent,
+    PrdCardComponent
   ],
   imports: [
     BrowserModule,

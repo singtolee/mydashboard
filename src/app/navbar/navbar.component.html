@@ -7,6 +7,9 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
+        <a class="nav-link" routerLink="/prdlist">Products List</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" routerLink="/editProduct">Edit Products</a>
       </li>
       <li class="nav-item">
@@ -26,7 +29,8 @@
       </li>
     </ul>
     <span class="navbar-text mr-5" *ngIf="auth.user | async as user">
-      {{user.email + "   "}}<button (click)="auth.signOut()" class="btn btn-outline-danger btn-sm">Log out</button>
+      {{user.email + " "}}
+      <button (click)="auth.signOut()" class="btn btn-outline-danger btn-sm">Log out</button>
     </span>
   </div>
 </nav>
