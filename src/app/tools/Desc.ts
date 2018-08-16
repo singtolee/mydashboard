@@ -1,6 +1,5 @@
 export class Desc {
-
-    desc:string;
-    image:string;
     thDesc:string;
+    desc:string;
+    image?:string;
   }

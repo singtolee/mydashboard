@@ -1,6 +1,6 @@
 import { Desc } from './Desc';
 export class Sku {
-    label:string;
     thLabel:string;
+    label:string;
     values:Array<Desc>;
   }
