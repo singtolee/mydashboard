@@ -22,7 +22,9 @@ export class LinksManagerComponent implements OnInit, OnDestroy {
   constructor(private db: AngularFirestore) {}
 
   ngOnInit() {
-    this.links = this.db.collection<Link>(this.dir).snapshotChanges().pipe(map(actions=>{
+    this.links = this.db.collection<Link>(this.dir,ref=>{
+      return ref.orderBy('order','asc')
+    }).snapshotChanges().pipe(map(actions=>{
       return actions.map(a=>{
         const data = a.payload.doc.data() as Link;
         const id = a.payload.doc.id;
